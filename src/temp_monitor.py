@@ -6,9 +6,16 @@ import time
 import board
 import busio
 from adafruit_ht16k33 import segments
+from w1thermsensor import W1ThermSensor, Unit, Sensor
 
 # Create the I2C interface.
 i2c = busio.I2C(board.SCL, board.SDA)
+
+# Initialize temp sensor
+sensor = W1ThermSensor(sensor_type=Sensor.DS18B20, sensor_id="00000fdf38f3")
+
+# Gets the temperature in F
+temp_f = sensor.get_temperature(Unit.DEGREES_F)
 
 # Create the LED segment class.
 # This creates a 7 segment 4 character display:
@@ -17,8 +24,8 @@ display.brightness = 0.25
 #display.colon(turn_on=False)
 #display[4] = 'F'
 
-#display.print('{}F'.format(98.6))
-display.marquee('123456789 ')
+display.print('{:.1f}F'.format(temp_f))
+#display.marquee('123456789 ')
 
 # Clear the display.
 #display.fill(0)
