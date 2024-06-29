@@ -1,1 +1,6 @@
 adafruit-circuitpython-ht16k33
+w1thermsensor
+ds18b20
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
